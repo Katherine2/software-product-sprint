@@ -1,3 +1,5 @@
+This repo contains Katherine Sirois' portfolio and SPS projects
+
 # Google Software Product Sprint
 
 This repo contains the projects you'll work on throughout SPS.
