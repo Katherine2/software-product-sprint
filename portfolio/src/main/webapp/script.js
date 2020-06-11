@@ -26,3 +26,26 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+function getWelcomeMessage() {
+  fetch('/data').then(response => response.json()).then((messages) => {
+    // stats is an object, not a string, so we have to
+    // reference its fields to create HTML content
+
+    const messagesListElement = document.getElementById('welcome-message-container');
+    messagesListElement.innerHTML = '';
+    messagesListElement.appendChild(
+        createListElement('English: ' + messages.English));
+    messagesListElement.appendChild(
+        createListElement('French: ' + messages.French));
+    messagesListElement.appendChild(
+        createListElement('Spanish: ' + messages.Spanish));
+  });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
