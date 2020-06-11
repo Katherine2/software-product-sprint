@@ -35,11 +35,41 @@ function getWelcomeMessage() {
     const messagesListElement = document.getElementById('welcome-message-container');
     messagesListElement.innerHTML = '';
     messagesListElement.appendChild(
-        createListElement('English: ' + messages.English));
+        createListElement('English: ' + messages.english));
     messagesListElement.appendChild(
-        createListElement('French: ' + messages.French));
+        createListElement('French: ' + messages.french));
     messagesListElement.appendChild(
-        createListElement('Spanish: ' + messages.Spanish));
+        createListElement('Spanish: ' + messages.spanish));
+  });
+}
+
+function getWelcomeMessageEnglish() {
+  fetch('/data').then(response => response.json()).then((messages) => {
+
+    const messagesElement = document.getElementById('welcome-message-container-english');
+    messagesElement.innerHTML = '';
+    messagesElement.appendChild(
+        createElement(messages.english));
+  });
+}
+
+function getWelcomeMessageFrench() {
+  fetch('/data').then(response => response.json()).then((messages) => {
+
+    const messagesElement = document.getElementById('welcome-message-container-french');
+    messagesElement.innerHTML = '';
+    messagesElement.appendChild(
+        createElement(messages.french));
+  });
+}
+
+function getWelcomeMessageSpanish() {
+  fetch('/data').then(response => response.json()).then((messages) => {
+
+    const messagesElement = document.getElementById('welcome-message-container-spanish');
+    messagesElement.innerHTML = '';
+    messagesElement.appendChild(
+        createElement(messages.spanish));
   });
 }
 
@@ -48,4 +78,10 @@ function createListElement(text) {
   const liElement = document.createElement('li');
   liElement.innerText = text;
   return liElement;
+}
+
+function createElement(text) {
+  const pElement = document.createElement('p');
+  pElement.innerText = text;
+  return pElement;
 }

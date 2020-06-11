@@ -45,13 +45,13 @@ public class DataServlet extends HttpServlet {
    */
   private String convertToJSON(ArrayList<String> messages) {
     String json = "{";
-    json += "\"English\": ";
+    json += "\"english\": ";
     json += "\"" + messages.get(0) + "\"";
     json += ", ";
-    json += "\"French\": ";
+    json += "\"french\": ";
     json += "\"" + messages.get(1) + "\"";
     json += ", ";
-    json += "\"Spanish\": ";
+    json += "\"spanish\": ";
     json += "\"" + messages.get(2) + "\"";
     json += "}";
     return json;
