@@ -4,6 +4,10 @@
   width: 650px;
 }
 
+#welcome-message-container {
+  margin-top: 20px;
+}
+
 #greeting-container {
   margin-top: 20px;
 }
