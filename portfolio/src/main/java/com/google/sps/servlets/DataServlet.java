@@ -34,30 +34,22 @@ import java.util.ArrayList;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-    //ArrayList<String> comments = new ArrayList<String>();
-    //ArrayList<String> emails = new ArrayList<String>();
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    //response.setContentType("text/html;");
-    //response.getWriter().println("Hello and welcome to my portfolio!");
-
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    
+    Query query = new Query("Comment");
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     List<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-      long id = entity.getKey().getId();
       String email = (String) entity.getProperty("email");
       String text = (String) entity.getProperty("comment");
-      long timestamp = (long) entity.getProperty("timestamp");
 
-      Comment comment = new Comment(id, email, text, timestamp);
+      Comment comment = new Comment(email, text);
       comments.add(comment);
     }
-
      Gson gson = new Gson();
 
     response.setContentType("application/json;");
@@ -77,12 +69,6 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
 
-    //emails.add(email);
-    //comments.add(comment);
-    
-    //System.out.println(emails);     //confirming that it works and the emails entered are properly added to the arraylist
-    //System.out.println(comments);   //confirming that it works and the comments entered are properly added to the arraylist
-    
     response.sendRedirect("/commentSubmitted.html");
   }
 

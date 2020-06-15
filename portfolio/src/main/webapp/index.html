@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="getComments()">
     <div id="content">
       <h1>Katherine's Portfolio</h1>
       <p>Click here to get a welcome message:</p>
@@ -54,6 +54,7 @@
       <button onclick="addRandomGreeting()">Get Inspired</button>
       <div id="greeting-container"></div>      
       <button onclick="location.href='comment.html'" type="button">Leave a comment</button>
+      <div id="comment-container"></div>
     </div>
   </body>
 </html>

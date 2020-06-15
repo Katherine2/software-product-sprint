@@ -1,17 +1,12 @@
 package com.google.sps.data;
 
-/** An comment */
+/** Add comment */
 public final class Comment {
-
-  private final long id;
   private final String email;
   private final String comment;
-  private final long timestamp;
 
-  public Comment(long id, String email, String comment, long timestamp) {
-    this.id = id;
+  public Comment(String email, String comment) {
     this.email = email;
     this.comment = comment;
-    this.timestamp = timestamp;
   }
 }
