@@ -41,9 +41,6 @@ public class DataServlet extends HttpServlet {
     emails.add(email);
     comments.add(comment);
     
-    System.out.println(emails);     //confirming that it works and the emails entered are properly added to the arraylist
-    System.out.println(comments);   //confirming that it works and the comments entered are properly added to the arraylist
-    
     response.sendRedirect("/commentSubmitted.html");
   }
 
