@@ -27,11 +27,10 @@ public class DataServlet extends HttpServlet {
 
     ArrayList<String> comments = new ArrayList<String>();
     ArrayList<String> emails = new ArrayList<String>();
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello Katherine!</h1>");
+    response.getWriter().println("Hello and welcome to my portfolio!");
   }
 
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
