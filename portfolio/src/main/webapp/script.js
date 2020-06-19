@@ -30,13 +30,28 @@ function addRandomGreeting() {
 /**
  * Fetches a welcome message from the server and adds it to the DOM.
  */
-function getComments() {
+function getComments(selectObject) {
+  var lang = selectObject.value;  
+  console.log(lang);
 
+  var english = "en";
+  var french = "fr";
+  var spanish = "es"
+  
   // The fetch() function returns a Promise because the request is asynchronous.
-  const responsePromise = fetch('/data');
-
+  if(lang == english){
+    const responsePromise = fetch('/data?lang=en');
+    responsePromise.then(handleResponse);
+  }
+  else if(lang == french){
+    const responsePromise = fetch('/data?lang=fr');
+    responsePromise.then(handleResponse);
+  }
+  else if(lang == spanish){
+    const responsePromise = fetch('/data?lang=es');
+    responsePromise.then(handleResponse);
+  }
   // When the request is complete, pass the response into handleResponse().
-  responsePromise.then(handleResponse);
 }
 
 /**
