@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
+import com.google.cloud.translate.Translation;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -39,8 +42,6 @@ public class DataServlet extends HttpServlet {
 
     String lang = request.getParameter("lang");
 
-    System.out.println(lang);
-
     Query query = new Query("Comment");
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -50,6 +51,10 @@ public class DataServlet extends HttpServlet {
     for (Entity entity : results.asIterable()) {
       String email = (String) entity.getProperty("email");
       String text = (String) entity.getProperty("comment");
+
+      Translate translate = TranslateOptions.getDefaultInstance().getService();
+      Translation translation = translate.translate(text, Translate.TranslateOption.targetLanguage(lang));
+      text = translation.getTranslatedText();
 
       Comment comment = new Comment(email, text);
       comments.add(comment);

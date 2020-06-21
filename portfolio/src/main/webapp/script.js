@@ -31,8 +31,7 @@ function addRandomGreeting() {
  * Fetches a welcome message from the server and adds it to the DOM.
  */
 function getComments(selectObject) {
-  var lang = selectObject.value;  
-  console.log(lang);
+  var lang = selectObject.value;
 
   var english = "en";
   var french = "fr";
