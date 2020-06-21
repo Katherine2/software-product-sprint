@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
+  <!--onload="getComments()-->
+  <body >
     <div id="content">
       <h1>Katherine's Portfolio</h1>
       <p>Click here to get a welcome message:</p>
@@ -48,11 +49,20 @@
       <br>
       <p>Finally, during my last years of high school, I was in my school's philharmonic orchestra. I played the trombone in school for 5 years and in the orchestra for 3. Here is a picture, you can see me a little in the back.</p>
       <img src="images/orchestra2.jpg" style="width:600px;height:400px;"/>
-      <p>I believe in positive thinking. It can get you through very difficult times. If you need a littel extra inspiration today, 
+      <p>I believe in positive thinking. It can get you through very difficult times. If you need a little extra inspiration today, 
           here are some of my favourite quotes about always trying and not being afraid to be a little different:
         </p>
       <button onclick="addRandomGreeting()">Get Inspired</button>
-      <div id="greeting-container"></div>
+      <div id="greeting-container"></div>      
+      <button onclick="location.href='comment.html'" type="button">Leave a comment</button>
+      <p>To view the comments, first select a language</p>
+      <select name="languages" id="lang-select" onchange="getComments(this)">
+          <option value="">--Please choose a language--</option>
+          <option value="en">English</option>
+          <option value="fr">French</option>
+          <option value="es">Spanish</option>
+      </select>
+      <div id="comment-container"></div>
     </div>
   </body>
 </html>

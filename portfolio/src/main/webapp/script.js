@@ -30,13 +30,27 @@ function addRandomGreeting() {
 /**
  * Fetches a welcome message from the server and adds it to the DOM.
  */
-function getWelcomeMessage() {
+function getComments(selectObject) {
+  var lang = selectObject.value;
 
+  var english = "en";
+  var french = "fr";
+  var spanish = "es"
+  
   // The fetch() function returns a Promise because the request is asynchronous.
-  const responsePromise = fetch('/data');
-
+  if(lang == english){
+    const responsePromise = fetch('/data?lang=en');
+    responsePromise.then(handleResponse);
+  }
+  else if(lang == french){
+    const responsePromise = fetch('/data?lang=fr');
+    responsePromise.then(handleResponse);
+  }
+  else if(lang == spanish){
+    const responsePromise = fetch('/data?lang=es');
+    responsePromise.then(handleResponse);
+  }
   // When the request is complete, pass the response into handleResponse().
-  responsePromise.then(handleResponse);
 }
 
 /**
@@ -51,12 +65,12 @@ function handleResponse(response) {
 
   // When the response is converted to text, pass the result into the
   // addQuoteToDom() function.
-  textPromise.then(addMessageToDom);
+  textPromise.then(addCommentToDom);
 }
 
 /** Adds a welcome message to the DOM. */
-function addMessageToDom(message) {
+function addCommentToDom(comment) {
 
-  const welcomeMessageContainer = document.getElementById('welcome-message-container');
-  welcomeMessageContainer.innerText = message;
+  const commentContainer = document.getElementById('comment-container');
+  commentContainer.innerText = comment;
 }
