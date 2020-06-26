@@ -65,7 +65,7 @@ function handleResponse(response) {
 
   // response.text() returns a Promise, because the response is a stream of
   // content and not a simple variable.
-  const textPromise = response.text();
+  const textPromise = response.json();
 
   // When the response is converted to text, pass the result into the
   // addQuoteToDom() function.
@@ -76,7 +76,7 @@ function handleResponse(response) {
 function addCommentToDom(comment) {
 
   const commentContainer = document.getElementById('comment-container');
-  commentContainer.innerText = comment;
+  commentContainer.innerText = JSON.stringify(comment);
 }
 
 function displayErrorMessage(message) {

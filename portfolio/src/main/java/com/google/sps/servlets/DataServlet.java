@@ -56,6 +56,8 @@ public class DataServlet extends HttpServlet {
       Translation translation = translator.translate(text, Translate.TranslateOption.targetLanguage(lang));
       text = translation.getTranslatedText();
 
+      text = text.replaceAll("\\u0026#39;","'");
+
       Comment comment = new Comment(email, text);
       comments.add(comment);
     }
