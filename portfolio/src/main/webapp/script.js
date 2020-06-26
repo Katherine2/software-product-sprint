@@ -38,6 +38,7 @@ function getComments(selectObject) {
   var spanish = "es"
   
   // The fetch() function returns a Promise because the request is asynchronous.
+  // When the request is complete, pass the response into handleResponse().
   if(lang == english){
     const responsePromise = fetch('/data?lang=en');
     responsePromise.then(handleResponse);
@@ -50,7 +51,10 @@ function getComments(selectObject) {
     const responsePromise = fetch('/data?lang=es');
     responsePromise.then(handleResponse);
   }
-  // When the request is complete, pass the response into handleResponse().
+  else{
+      const errorMessage = "Please select a language from the options to view the comments";
+      displayErrorMessage(errorMessage);
+  }
 }
 
 /**
@@ -73,4 +77,10 @@ function addCommentToDom(comment) {
 
   const commentContainer = document.getElementById('comment-container');
   commentContainer.innerText = comment;
+}
+
+function displayErrorMessage(message) {
+
+  const commentContainer = document.getElementById('comment-container');
+  commentContainer.innerText = message;
 }

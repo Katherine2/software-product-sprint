@@ -52,8 +52,8 @@ public class DataServlet extends HttpServlet {
       String email = (String) entity.getProperty("email");
       String text = (String) entity.getProperty("comment");
 
-      Translate translate = TranslateOptions.getDefaultInstance().getService();
-      Translation translation = translate.translate(text, Translate.TranslateOption.targetLanguage(lang));
+      Translate translator = TranslateOptions.getDefaultInstance().getService();
+      Translation translation = translator.translate(text, Translate.TranslateOption.targetLanguage(lang));
       text = translation.getTranslatedText();
 
       Comment comment = new Comment(email, text);
