@@ -14,10 +14,50 @@
 
 package com.google.sps;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import java.util.Collection;
 
 public final class FindMeetingQuery {
+  private static final Collection<Event> NO_EVENTS = Collections.emptySet();
+  private static final Collection<String> NO_ATTENDEES = Collections.emptySet();
+
+  // Some people that we can use in our tests.
+  private static final String PERSON_A = "Person A";
+  private static final String PERSON_B = "Person B";
+
+  // All dates are the first day of the year 2020.
+  private static final int TIME_0800AM = TimeRange.getTimeInMinutes(8, 0);
+  private static final int TIME_0830AM = TimeRange.getTimeInMinutes(8, 30);
+  private static final int TIME_0900AM = TimeRange.getTimeInMinutes(9, 0);
+  private static final int TIME_0930AM = TimeRange.getTimeInMinutes(9, 30);
+  private static final int TIME_1000AM = TimeRange.getTimeInMinutes(10, 0);
+  private static final int TIME_1100AM = TimeRange.getTimeInMinutes(11, 00);
+
+  private static final int DURATION_30_MINUTES = 30;
+  private static final int DURATION_60_MINUTES = 60;
+  private static final int DURATION_90_MINUTES = 90;
+  private static final int DURATION_1_HOUR = 60;
+  private static final int DURATION_2_HOUR = 120;
+
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+    //throw new UnsupportedOperationException("TODO: Implement this method.");
+    int maxHours = TimeRange.WHOLE_DAY.duration() ;
+
+    if(request.getAttendees().isEmpty()){           //if there are no attendees in the request
+        return Arrays.asList(TimeRange.WHOLE_DAY);  //the event can be scheduled at any time of the day
+    }
+    else if(request.getDuration() > maxHours){           //if the duration of the meeting exceeds the amount of time in a day
+        return Arrays.asList();                     //there are no possible meeting times
+    }
+    else if(!events.isEmpty()){
+        System.out.println(events.when);
+        //return Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false), TimeRange.fromStartEnd(TIME_0900AM, TimeRange.END_OF_DAY, true));
+    }
+    return null;
   }
 }

@@ -57,7 +57,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void optionsForNoAttendees() {
+  public void optionsForNoAttendees() { //done
     MeetingRequest request = new MeetingRequest(NO_ATTENDEES, DURATION_1_HOUR);
 
     Collection<TimeRange> actual = query.query(NO_EVENTS, request);
@@ -67,7 +67,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void noOptionsForTooLongOfARequest() {
+  public void noOptionsForTooLongOfARequest() { //done
     // The duration should be longer than a day. This means there should be no options.
     int duration = TimeRange.WHOLE_DAY.duration() + 1;
     MeetingRequest request = new MeetingRequest(Arrays.asList(PERSON_A), duration);
