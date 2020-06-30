@@ -55,15 +55,14 @@ public final class FindMeetingQuery {
         return Arrays.asList();                     //there are no possible meeting times
     }
     else if(!events.isEmpty()){
-        //System.out.println(TIME_0830AM);
         for (Event event: events){
-            TimeRange time = event.getWhen();
-            int startTime = time.start();
-            int endTime = time.end();
-            //System.out.println(startTime);
-            //System.out.println(endTime);
-            if((startTime - START_OF_DAY)>= 30){
-                if((END_OF_DAY - endTime)>=30){
+            long requestedDuration = request.getDuration();
+            TimeRange time = event.getWhen();       //get the time interval the attendee has a meeting
+            int startTime = time.start();           //get the start time of the meeting
+            int endTime = time.end();               //get the end time of the meeting
+            if((startTime - START_OF_DAY)>= requestedDuration){    //if there is enough time for the requested meeting to be before the already scheduled meeting
+                if((END_OF_DAY - endTime)>= requestedDuration){     //if there is enough time for the requested meeting to be after the already scheduled meeting
+                    //return the times from the start of the day until the start of the scheduled meeting (excluding the actual start time) and the times from the end of the scheduled meeting to the end of the day
                     return Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, startTime, false), TimeRange.fromStartEnd(endTime, TimeRange.END_OF_DAY, true));
                 }
             }
