@@ -175,7 +175,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void doubleBookedPeople() {
+  public void doubleBookedPeople() {    //done
     // Have one person, but have them registered to attend two events at the same time.
     //
     // Events  :       |----A----|

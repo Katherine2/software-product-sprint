@@ -105,6 +105,13 @@ public final class FindMeetingQuery {
                         return Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, startTime1, false),TimeRange.fromStartEnd(endTime1, TimeRange.END_OF_DAY, true));
                     }
                 }
+                //if there is not enough room from the start of the day to the start of the first scheduled meeting
+                //if there is enough room between the end of the first scheduled meeting and the start of the second scheduled meeting
+                else if((startTime2 - endTime1) >= requestedDuration) {
+                    if((END_OF_DAY - endTime2) <= requestedDuration){       //if there is not enough room from the end of the second scheduled meeting and the end of the day 
+                        return Arrays.asList(TimeRange.fromStartDuration(TIME_0830AM, DURATION_30_MINUTES));
+                    }
+                }
             }
         }
     }
