@@ -86,11 +86,15 @@ public final class FindMeetingQuery {
         else if (counter == 2){                                             //if there are 2 events                
             if((startTime1 - START_OF_DAY) >= requestedDuration){           //if there is enough time for the requested meeting to be before the first already scheduled meeting
                 if((END_OF_DAY - endTime2) >= requestedDuration){           //if there is enough time for the requested meeting to be after the second already scheduled meeting
-                    if((startTime2 - startTime1)>= requestedDuration){      //if there is enough time between the 2 meetings
+                    if((startTime2 - endTime1)>= requestedDuration){        //if there is enough time between the 2 meetings
                         //return the times from the start of the day until the start of the first scheduled meeting (excluding the actual start time) 
                         //return the times from the end of the first scheduled meeting until the start of the second scheduled meeting (excluding the actual start time) 
                         //and the times from the end of the second scheduled meeting to the end of the day
-                        return Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0800AM, false), TimeRange.fromStartEnd(TIME_0830AM, TIME_0900AM, false), TimeRange.fromStartEnd(TIME_0930AM, TimeRange.END_OF_DAY, true));
+                        return Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, startTime1, false), TimeRange.fromStartEnd(endTime1, startTime2, false), TimeRange.fromStartEnd(endTime2, TimeRange.END_OF_DAY, true));
+                    }
+                    else if((startTime2 - endTime1)<= requestedDuration){   //if there is not enough time between the 2 meetings or if the 2 meetings are overlapping
+                        //return the times from the start of the day until the start of the first scheduled meeting (excluding the actual start time) and the times from the end of the second scheduled meeting to the end of the day
+                        return Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, startTime1, false), TimeRange.fromStartEnd(endTime2, TimeRange.END_OF_DAY, true));
                     }
                 }
             }
