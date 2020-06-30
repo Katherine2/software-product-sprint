@@ -200,7 +200,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void justEnoughRoom() {
+  public void justEnoughRoom() {    //done
     // Have one person, but make it so that there is just enough room at one point in the day to
     // have the meeting.
     //
@@ -249,7 +249,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void notEnoughRoom() {
+  public void notEnoughRoom() { //done
     // Have one person, but make it so that there is not enough room at any point in the day to
     // have the meeting.
     //

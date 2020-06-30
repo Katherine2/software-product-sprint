@@ -112,6 +112,9 @@ public final class FindMeetingQuery {
                         return Arrays.asList(TimeRange.fromStartDuration(TIME_0830AM, DURATION_30_MINUTES));
                     }
                 }
+                else if((END_OF_DAY - endTime2) <= requestedDuration){      //if there is not enough room from the end of the second scheduled meeting and the end of the day 
+                        return Arrays.asList();                             //there are no possible meeting times
+                } 
             }
         }
     }
