@@ -20,8 +20,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import java.util.Collection;
-
 public final class FindMeetingQuery {
   private static final Collection<Event> NO_EVENTS = Collections.emptySet();
   private static final Collection<String> NO_ATTENDEES = Collections.emptySet();
@@ -31,6 +29,8 @@ public final class FindMeetingQuery {
   private static final String PERSON_B = "Person B";
 
   // All dates are the first day of the year 2020.
+  public static final int START_OF_DAY = TimeRange.getTimeInMinutes(0, 0);
+  public static final int END_OF_DAY = TimeRange.getTimeInMinutes(23, 59);
   private static final int TIME_0800AM = TimeRange.getTimeInMinutes(8, 0);
   private static final int TIME_0830AM = TimeRange.getTimeInMinutes(8, 30);
   private static final int TIME_0900AM = TimeRange.getTimeInMinutes(9, 0);
@@ -55,8 +55,19 @@ public final class FindMeetingQuery {
         return Arrays.asList();                     //there are no possible meeting times
     }
     else if(!events.isEmpty()){
-        System.out.println(events.when);
-        //return Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false), TimeRange.fromStartEnd(TIME_0900AM, TimeRange.END_OF_DAY, true));
+        //System.out.println(TIME_0830AM);
+        for (Event event: events){
+            TimeRange time = event.getWhen();
+            int startTime = time.start();
+            int endTime = time.end();
+            //System.out.println(startTime);
+            //System.out.println(endTime);
+            if((startTime - START_OF_DAY)>= 30){
+                if((END_OF_DAY - endTime)>=30){
+                    return Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, startTime, false), TimeRange.fromStartEnd(endTime, TimeRange.END_OF_DAY, true));
+                }
+            }
+        }
     }
     return null;
   }
