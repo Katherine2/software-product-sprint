@@ -54,21 +54,22 @@ public final class FindMeetingQuery {
     int endTime1 = -1;
     int startTime2 = -1;
     int endTime2 = -1;
-    Set<String> people = null;
-
-    //System.out.println(request.getAttendees());
+    Collection<String> people = null;
 
     if(request.getAttendees().isEmpty()){           //if there are no attendees in the request
         return Arrays.asList(TimeRange.WHOLE_DAY);  //the event can be scheduled at any time of the day
     }
     else if(request.getDuration() > maxHours){           //if the duration of the meeting exceeds the amount of time in a day
-        return Arrays.asList();                     //there are no possible meeting times
+        return Arrays.asList();                          //there are no possible meeting times
+    }
+    else if(events.isEmpty()){                      //if there are no scheduled events
+        return Arrays.asList(TimeRange.WHOLE_DAY);  //the event can be scheduled at any time of the day
     }
     else if(!events.isEmpty()){
         for (Event event: events){
             counter ++;
             people = event.getAttendees();
-            //System.out.println(people);
+            System.out.println(people);
             if (counter == 1){                      //on the first event
                 TimeRange time = event.getWhen();   //get the time interval the attendee has a meeting  
                 startTime1 = time.start();          //get the start time of the meeting
@@ -81,10 +82,11 @@ public final class FindMeetingQuery {
                 endTime2 = time.end();              //get the end time of the meeting
             }
         }
-        if(!request.getAttendees().contains(people)){   //if the people in the request are not the same as the people with events
-            return Arrays.asList(TimeRange.WHOLE_DAY);  //the event can be scheduled at any time of the day
-        }
-        else if (counter == 1){                                          //if there is only one event
+        //if(!(request.getAttendees() == people)){   //if the people in the request are not the same as the people with events
+        //    System.out.println("in no matching people");
+        //    return Arrays.asList(TimeRange.WHOLE_DAY);  //the event can be scheduled at any time of the day
+        //}
+        if (counter == 1){                                          //if there is only one event
             if((startTime1 - START_OF_DAY)>= requestedDuration){    //if there is enough time for the requested meeting to be before the already scheduled meeting
                 if((END_OF_DAY - endTime1)>= requestedDuration){    //if there is enough time for the requested meeting to be after the already scheduled meeting
                     //return the times from the start of the day until the start of the scheduled meeting (excluding the actual start time) and the times from the end of the scheduled meeting to the end of the day

@@ -224,7 +224,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void ignoresPeopleNotAttending() { //done
+  public void ignoresPeopleNotAttending() { //TODO
     // Add an event, but make the only attendee someone different from the person looking to book
     // a meeting. This event should not affect the booking.
     Collection<Event> events = Arrays.asList(new Event("Event 1",
@@ -238,7 +238,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void noConflicts() {
+  public void noConflicts() {   //done
     MeetingRequest request =
         new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
 
