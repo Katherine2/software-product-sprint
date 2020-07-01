@@ -57,7 +57,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void optionsForNoAttendees() { //done
+  public void optionsForNoAttendees() {
     MeetingRequest request = new MeetingRequest(NO_ATTENDEES, DURATION_1_HOUR);
 
     Collection<TimeRange> actual = query.query(NO_EVENTS, request);
@@ -67,7 +67,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void noOptionsForTooLongOfARequest() { //done
+  public void noOptionsForTooLongOfARequest() 
     // The duration should be longer than a day. This means there should be no options.
     int duration = TimeRange.WHOLE_DAY.duration() + 1;
     MeetingRequest request = new MeetingRequest(Arrays.asList(PERSON_A), duration);
@@ -79,7 +79,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void eventSplitsRestriction() { //done
+  public void eventSplitsRestriction() { 
     // The event should split the day into two options (before and after the event).
     Collection<Event> events = Arrays.asList(new Event("Event 1",
         TimeRange.fromStartDuration(TIME_0830AM, DURATION_30_MINUTES), Arrays.asList(PERSON_A)));
@@ -95,7 +95,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void everyAttendeeIsConsidered() { //
+  public void everyAttendeeIsConsidered() { 
     // Have each person have different events. We should see two options because each person has
     // split the restricted times.
     //
@@ -122,7 +122,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void overlappingEvents() { //done
+  public void overlappingEvents() { 
     // Have an event for each person, but have their events overlap. We should only see two options.
     //
     // Events  :       |--A--|
@@ -148,7 +148,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void nestedEvents() {  //done
+  public void nestedEvents() {  
     // Have an event for each person, but have one person's event fully contain another's event. We
     // should see two options.
     //
@@ -175,7 +175,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void doubleBookedPeople() {    //done
+  public void doubleBookedPeople() {    
     // Have one person, but have them registered to attend two events at the same time.
     //
     // Events  :       |----A----|
@@ -200,7 +200,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void justEnoughRoom() {    //done
+  public void justEnoughRoom() {    
     // Have one person, but make it so that there is just enough room at one point in the day to
     // have the meeting.
     //
@@ -238,7 +238,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void noConflicts() {   //done
+  public void noConflicts() {  
     MeetingRequest request =
         new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
 
@@ -249,7 +249,7 @@ public final class FindMeetingQueryTest {
   }
 
   @Test
-  public void notEnoughRoom() { //done
+  public void notEnoughRoom() { 
     // Have one person, but make it so that there is not enough room at any point in the day to
     // have the meeting.
     //

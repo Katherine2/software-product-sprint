@@ -46,7 +46,6 @@ public final class FindMeetingQuery {
   private static final int DURATION_2_HOUR = 120;
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    //throw new UnsupportedOperationException("TODO: Implement this method.");
     int counter = 0;
     int maxHours = TimeRange.WHOLE_DAY.duration();
     long requestedDuration = request.getDuration();
